@@ -13,7 +13,7 @@ services:
 
   php:
     container_name: NPMR-PHP
-    image: "php:7-fpm-alpine"
+    image: "yourtion/php-fpm-alpine"
     ports:
       - "9000:9000"
     links:

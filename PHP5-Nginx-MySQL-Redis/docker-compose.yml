@@ -1,0 +1,41 @@
+version: '2'
+services: 
+  nginx:
+    container_name: NPMR-Nginx
+    image: "nginx:mainline-alpine"
+    ports:
+      - "80:80"
+    links:
+      - "php"
+    volumes:
+      - ${PHP_FILE}:/app
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+  php:
+    container_name: NPMR-PHP
+    image: "yourtion/php-fpm-alpine:5"
+    ports:
+      - "9000:9000"
+    links:
+      - "mysql"
+      - "redis"
+    volumes:
+      - ${PHP_FILE}:/app
+
+  mysql:
+    container_name: NPMR-MySQL
+    image: "mysql"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ${MYSQL_DATA}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+
+  redis:
+    container_name: NPMR-Redis
+    image: "redis:alpine"
+    volumes:
+      - ${REDIS_DATA}:/data
+    ports:
+      - "6379:6379"

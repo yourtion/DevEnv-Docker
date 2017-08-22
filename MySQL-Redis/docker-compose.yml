@@ -9,6 +9,7 @@ services:
     volumes:
       - ~/Codes/Docker/DockerDatas/mysql:/var/lib/mysql
       - ./my.cnf:/etc/mysql/my.cnf
+      - ./tiny-mysql:/etc/mysql/conf.d
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
 
